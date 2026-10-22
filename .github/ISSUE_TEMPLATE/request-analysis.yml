@@ -1,30 +1,33 @@
-name: درخواست ثبت تحلیل
-description: پیشنهاد افزودن یک ایده جدید تریدینگ‌ویو بدون شروع خودکار تحلیل
-title: "درخواست ثبت ایده: "
+name: درخواست پرونده خام
+description: لینک تنها، بدون استخراج متن یا بررسی تحلیل
+title: "درخواست پرونده: "
 body:
   - type: markdown
     attributes:
       value: |
-        این فرم فقط درخواست ایجاد می‌کند و به‌طور خودکار پرونده یا تحلیل نمی‌سازد.
-        لطفاً تنها پیوند عمومی و اطلاعات مستند را بنویسید.
+        پیام لینک فقط برای ایجاد case.md است. متن و آپدیت‌ها باید بعداً توسط کاربر ارسال شوند.
   - type: input
-    id: source
+    id: url
     attributes:
-      label: نشانی مستقیم تحلیل در تریدینگ‌ویو
+      label: لینک مستقیم تحلیل در تریدینگ‌ویو
       placeholder: https://www.tradingview.com/chart/...
     validations:
       required: true
   - type: input
-    id: author
+    id: market
     attributes:
-      label: نام تحلیلگر
-      placeholder: نام کاربری، در صورت اطلاع
+      label: بازار (اختیاری؛ فقط اگر می‌دانید)
     validations:
       required: false
-  - type: textarea
-    id: note
+  - type: input
+    id: timeframe
     attributes:
-      label: توضیح یا نکته قابل پیگیری
-      description: فرضیه یا سؤال آموزشی خود را بنویسید؛ از ثبت سیگنال قطعی خودداری کنید.
+      label: تایم‌فریم (اختیاری)
+    validations:
+      required: false
+  - type: input
+    id: analyst
+    attributes:
+      label: تحلیلگر (اختیاری)
     validations:
       required: false
