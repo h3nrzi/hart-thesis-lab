@@ -1,19 +1,37 @@
-name: بررسی ساختار و شرایط پرونده
+name: اعتبارسنجی ساختار و کنترل سوابق
 on:
   push:
   pull_request:
   workflow_dispatch:
+permissions:
+  contents: read
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - name: دریافت مخزن
+      - name: دریافت کامل تاریخچه Git
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: نصب پایتون
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: اعتبارسنجی مستندات
+      - name: اعتبارسنجی پرونده و قواعد مرحله‌ها
         run: python3 scripts/validate_structure.py
-      - name: آزمون قواعد گام‌به‌گام
+      - name: تست قواعد پرونده و ایجنت
         run: python3 -m unittest discover -s tests -v
+      - name: جلوگیری از بازنویسی سوابق
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          PUSH_BEFORE: ${{ github.event.before }}
+        run: |
+          if [[ "$EVENT_NAME" == "pull_request" ]]; then
+            python3 scripts/check_change_policy.py --base "$PR_BASE"
+          elif [[ "$EVENT_NAME" == "push" && "$PUSH_BEFORE" != "0000000000000000000000000000000000000000" && -n "$PUSH_BEFORE" ]]; then
+            python3 scripts/check_change_policy.py --base "$PUSH_BEFORE"
+          else
+            echo "بدون مبنای قابل مقایسه؛ کنترل محتوا و تست‌ها اجرا شدند."
+          fi
