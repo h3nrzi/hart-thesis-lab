@@ -63,13 +63,19 @@ class FlowTests(unittest.TestCase):
                                         "--update", update.name).returncode, 0)
         self.assertTrue((folder/"outcome.md").exists())
         self.assertEqual(self.run_script("validate_structure.py").returncode, 0)
-        case = folder/"case.md"
-        case.write_text(case.read_text(encoding="utf-8").replace(
-            "**وضعیت پرونده:** در انتظار متن اولیه", "**وضعیت پرونده:** بسته‌شده"), encoding="utf-8")
-        self.assertNotEqual(self.run_script("validate_structure.py").returncode, 0)
+        self.assertIn("در حال تدوین نتیجه", (folder/"case.md").read_text(encoding="utf-8"))
+        self.assertNotEqual(self.run_script("finalize_outcome.py", "--id", "DEMO1234").returncode, 0)
         out = folder/"outcome.md"
-        out.write_text(out.read_text(encoding="utf-8").replace(
-            "**وضعیت ارزیابی:** پیش‌نویس", "**وضعیت ارزیابی:** تکمیل‌شده"), encoding="utf-8")
+        body = out.read_text(encoding="utf-8")
+        body = body.replace("[مطابق آپدیت مستند.]", "مدرس در آپدیت ارسالی پایان سناریو را اعلام کرده است.")
+        body = body.replace("[تفکیک سناریوی اصلی، تغییرات مدرس و مشاهده مستقل بازار.]",
+                            "در این مثال فرضی، سناریوی اولیه و آپدیت‌های مدرس جداگانه بررسی شدند.")
+        body = body.replace("[با شواهد؛ بدون ادعای سوددهی فاقد سند.]",
+                            "سود یا زیان واقعی معامله در این مثال نامشخص است.")
+        out.write_text(body, encoding="utf-8")
+        self.assertEqual(self.run_script("finalize_outcome.py", "--id", "DEMO1234").returncode, 0)
+        self.assertIn("بسته‌شده", (folder/"case.md").read_text(encoding="utf-8"))
+        self.assertIn("بسته‌شده", (self.root/"INDEX.md").read_text(encoding="utf-8"))
         self.assertEqual(self.run_script("validate_structure.py").returncode, 0)
 
 if __name__ == "__main__":

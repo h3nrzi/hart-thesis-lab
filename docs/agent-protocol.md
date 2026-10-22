@@ -18,7 +18,7 @@ python3 scripts/validate_structure.py
 - متن اولیه: کاربر متن را در فایل ورودی محلی می‌دهد؛ `python3 scripts/record_original.py --id <id> --text-file <user-text.txt>` نسخه اولیه را بدون دانلود از TradingView ثبت کرده و case/INDEX را هماهنگ می‌کند. اجرای مجدد متن یکسان بدون اثر است.
 - آپدیت مدرس: `python3 scripts/record_event.py --id <id> --kind update --text-file <user-update.txt> --source-url <url>`؛ اگر مدرس نتیجه را صریحاً بررسی کرده، فقط با شواهد ارسالی کاربر `--declares-outcome --witness <evidence>` مجاز است. سند تکراری ایجاد نمی‌شود.
 - نقد AI: `python3 scripts/record_event.py --id <id> --kind review --text-file <ai-review.txt>` و ثبت مستقل در همان پوشه. تکرار متن یکسان سند دوباره نمی‌سازد.
-- نتیجه: تنها بعد از اعلام صریح مدرس، `python3 scripts/prepare_outcome.py --id <id> --update <file>` پیش‌نویس می‌دهد؛ سپس تکمیل و بسته‌شدن با کنترل جداگانه.
+- نتیجه: تنها بعد از اعلام صریح مدرس، `python3 scripts/prepare_outcome.py --id <id> --update <file>` پیش‌نویس می‌دهد؛ سپس بعد از تکمیل شواهد و جای‌نگهدارها، `python3 scripts/finalize_outcome.py --id <id>` پرونده را با کنترل و هماهنگی INDEX می‌بندد.
 
 ## پروتکل سؤال (حداقل سؤال لازم)
 | حالت | سؤال فقط در نبود اطلاعات |
