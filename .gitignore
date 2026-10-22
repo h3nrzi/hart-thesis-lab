@@ -1,0 +1,16 @@
+# فایل‌های تولیدشده توسط Python؛ جزئی از پرونده‌های پژوهشی نیستند.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+.venv/
+venv/
+
+# داده‌های خصوصی محلی و فایل‌های سیستم‌عامل
+.env
+.env.*
+!.env.example
+.DS_Store

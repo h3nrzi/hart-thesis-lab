@@ -4,9 +4,9 @@
 
 ## شروع هر سشن (بدون تغییر فایل)
 1. ابتدا `README.md`، `CONTRIBUTING.md`، `docs/agent-protocol.md` و `docs/state-machine.md` را بخوان.
-2. دستور `python3 scripts/agent_status.py` و در صورت داشتن شناسه `python3 scripts/agent_status.py --id <idea-id>` را اجرا کن؛ **فقط خروجی واقعی آن** مرحله فعلی و سؤال بعدی را تعیین می‌کند.
-3. `python3 scripts/validate_structure.py` را اجرا کن. اگر ناسازگاری وجود دارد، چیزی تغییر نده؛ گزارش کن.
-4. وضعیت git و HEAD را با `git status --short` و `git rev-parse HEAD` بررسی کن. حافظه سشن قبلی مبنا نیست.
+2. دستور `python3 -B scripts/agent_status.py` و در صورت داشتن شناسه `python3 -B scripts/agent_status.py --id <idea-id>` را اجرا کن؛ **فقط خروجی واقعی آن** مرحله فعلی و سؤال بعدی را تعیین می‌کند.
+3. `python3 -B scripts/validate_structure.py` را اجرا کن. اگر ناسازگاری وجود دارد، چیزی تغییر نده؛ گزارش کن.
+4. وضعیت Git و HEAD را با `git status --short` و `git rev-parse HEAD` بررسی کن. پیش از هر تغییر، `python3 -B scripts/check_worktree.py` را اجرا کن. حافظه سشن قبلی مبنا نیست.
 
 ## قرارداد پیام‌ها
 - لینک تحلیل به تنهایی = فقط `case.md` و ردیف `INDEX.md`. **هرگز TradingView را برای استخراج متن یا عکس باز نکن.**
@@ -17,9 +17,10 @@
 - هنگام آغاز صرف سشن/درخواست آمادگی، هیچ فایل جدیدی نساز.
 
 ## تغییر ایمن در سشن‌های موازی
+- فایل‌های کشی که در `.gitignore` نادیده گرفته شده‌اند (مثل `scripts/__pycache__/`) مانع شروع کار نیستند و نباید برای رفع مانع حذف شوند؛ **فقط** تغییرات گزارش‌شده توسط `check_worktree.py` مانع‌اند. 
 - پروتکل دقیق در `docs/concurrency.md`: شاخه مجزای هر تغییر، بررسی HEAD پایه، PR و CI؛ هیچ `force push`، `reset --hard`، `git push main` مستقیم یا بازنویسی پرونده‌ای که ایجنت دیگری تغییر داده مجاز نیست.
 - قبل از هر تغییر مجدداً وضعیت پرونده را بخوان؛ در صورت اختلاف/تداخل STOP و تقاضای حل تعارض بده، نه ادغام خودسرانه.
-- پیش از پیشنهاد ادغام `python3 scripts/validate_structure.py` و `python3 -m unittest discover -s tests -v` را اجرا کن. در CI سیاست تغییرات قبلی نیز بررسی می‌شود.
+- پیش از پیشنهاد ادغام `python3 -B scripts/validate_structure.py` و `python3 -B -m unittest discover -s tests -v` را اجرا کن. در CI سیاست تغییرات قبلی نیز بررسی می‌شود.
 - خروجی هر مرحله: شناسه پرونده، وضعیت قبلی/جدید، فایل‌های اضافه‌شده، منبع داده، Commit/PR (اگر وجود دارد)، قدم بعدی؛ بدون ادعای ثبت موفقِ تأییدنشده.
 
 ## مهارت‌ها

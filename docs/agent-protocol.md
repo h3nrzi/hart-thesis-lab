@@ -8,10 +8,11 @@
 ```bash
 git status --short
 git rev-parse HEAD
-python3 scripts/agent_status.py
-python3 scripts/validate_structure.py
+python3 -B scripts/check_worktree.py
+python3 -B scripts/agent_status.py
+python3 -B scripts/validate_structure.py
 ```
-اگر `--id` داده شد، وضعیت همان پرونده را بخوان. خروجی `agent_status` شامل `stage`، `next_question`، `allowed_actions` و `blockers` است. ابتدا ابزار را اجرا، سپس مطابق وضعیت عمل کن. اگر مرحله `CONFLICT` بود، دست نزن.
+اگر `--id` داده شد، وضعیت همان پرونده را بخوان. پوشه‌های ignored مانند `__pycache__` نباید حذف شوند یا جلوی عملیات را بگیرند؛ فقط خروجی `check_worktree.py` با `clean: false` مانع تغییر است. خروجی `agent_status` شامل `stage`، `next_question`، `allowed_actions` و `blockers` است. ابتدا ابزار را اجرا، سپس مطابق وضعیت عمل کن. اگر مرحله `CONFLICT` بود، دست نزن.
 
 ## فرمان‌های کار با پرونده
 - لینک: `python3 scripts/create_case.py --url "<link>"`؛ فقط case و INDEX ایجاد می‌شوند.

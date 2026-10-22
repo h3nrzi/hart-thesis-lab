@@ -23,7 +23,9 @@ analyses/<idea-id>/
 
 در لحظه ارسال لینک **فقط case.md** وجود دارد؛ سایر نام‌ها نمای ساختارِ مراحل بعدی هستند.
 
-## ورود ایجنت‌ها\n\nبرای Codex و Antigravity، [راهنمای راه‌اندازی](docs/agent-onboarding.md)، [قرارداد مشترک AGENTS.md](AGENTS.md) و [ماشین حالت](docs/state-machine.md) مبنا هستند. بدون نیاز به حافظه چت، `python3 scripts/agent_status.py` مرحله و سؤال بعدی را مشخص می‌کند. مهارت‌های بازار در `.agents/skills/` و دستورالعمل هم‌زمانی در `docs/concurrency.md` قرار دارند.\n\n## اسناد
+## ورود ایجنت‌ها\n\nبرای Codex و Antigravity، [راهنمای راه‌اندازی](docs/agent-onboarding.md)، [قرارداد مشترک AGENTS.md](AGENTS.md) و [ماشین حالت](docs/state-machine.md) مبنا هستند. بدون نیاز به حافظه چت، `python3 scripts/agent_status.py` مرحله و سؤال بعدی را مشخص می‌کند. مهارت‌های بازار در `.agents/skills/` و دستورالعمل هم‌زمانی در `docs/concurrency.md` قرار دارند.\n\nبرای جلوگیری از توقف بی‌مورد با فایل‌های کش پایتون، `.gitignore` و `scripts/check_worktree.py` معیار بررسی تغییرات محلی‌اند؛ ایجنت هیچ فایلی را برای پاک‌سازی محیط حذف نمی‌کند.
+
+## اسناد
 
 [چرخه کار](docs/workflow.md) · [قواعد ثبت شواهد](CONTRIBUTING.md) · [وضعیت‌ها](docs/statuses.md) · [معیارهای ارزیابی](docs/evaluation-criteria.md) · [فهرست پرونده‌ها](INDEX.md) · [قالب‌ها](templates/README.md)
 
