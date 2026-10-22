@@ -6,11 +6,11 @@ import sys
 
 ریشه = Path(__file__).resolve().parent.parent
 فایلهای_لازم = [
-    "README.md", "فهرست-تحلیل‌ها.md", "قواعد-مستندسازی.md",
-    "راهنما/چرخه-کاری.md", "راهنما/معیارهای-ارزیابی.md",
-    "راهنما/وضعیت‌ها.md", "الگوها/تحلیل-اولیه.md",
-    "الگوها/به‌روزرسانی-مدرس.md", "الگوها/بازبینی-مستقل.md",
-    "الگوها/ارزیابی-نتیجه.md", "تحلیل‌ها/README.md",
+    "README.md", "INDEX.md", "CONTRIBUTING.md",
+    "docs/workflow.md", "docs/evaluation-criteria.md",
+    "docs/statuses.md", "templates/original.md",
+    "templates/update.md", "templates/review.md",
+    "templates/outcome.md", "analyses/README.md",
 ]
 اشکالها = []
 
@@ -18,7 +18,7 @@ for نام in فایلهای_لازم:
     if not (ریشه / نام).is_file():
         اشکالها.append(f"فایل ضروری موجود نیست: {نام}")
 
-پوشه = ریشه / "تحلیل‌ها"
+پوشه = ریشه / "analyses"
 شمار = 0
 if پوشه.is_dir():
     for پرونده in sorted(پوشه.iterdir()):
@@ -27,7 +27,7 @@ if پوشه.is_dir():
         شمار += 1
         if not re.fullmatch(r"[A-Za-z0-9_-]+", پرونده.name):
             اشکالها.append(f"شناسه نامعتبر پرونده: {پرونده.name}")
-        اولیه = پرونده / "تحلیل-اولیه.md"
+        اولیه = پرونده / "original.md"
         if not اولیه.is_file():
             اشکالها.append(f"تحلیل اولیه موجود نیست: {پرونده.name}")
         else:
@@ -37,7 +37,7 @@ if پوشه.is_dir():
                     اشکالها.append(f"بخش «{عبارت}» در پرونده {پرونده.name} موجود نیست")
             if پرونده.name not in متن:
                 اشکالها.append(f"شناسه در متن تحلیل اولیه نیست: {پرونده.name}")
-        for زیرپوشه in ("به‌روزرسانی‌ها", "برداشت‌ها", "ارزیابی‌ها"):
+        for زیرپوشه in ("updates", "reviews", "evaluations"):
             مسیر = پرونده / زیرپوشه
             if not مسیر.is_dir():
                 اشکالها.append(f"پوشه رویداد موجود نیست: {مسیر.relative_to(ریشه)}")

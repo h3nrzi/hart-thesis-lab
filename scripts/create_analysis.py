@@ -9,9 +9,9 @@ from urllib.parse import urlparse
 
 ریشه = Path(__file__).resolve().parent.parent
 فرمان = argparse.ArgumentParser(description="ایجاد پرونده خام از نشانی تریدینگ‌ویو")
-فرمان.add_argument("--نشانی", required=True, help="نشانی مستقیم ایده در تریدینگ‌ویو")
+فرمان.add_argument("--url", required=True, help="نشانی مستقیم ایده در تریدینگ‌ویو")
 ورودی = فرمان.parse_args()
-نشانی = ورودی.نشانی.strip()
+نشانی = ورودی.url.strip()
 نشانی_تجزیه = urlparse(نشانی)
 
 if نشانی_تجزیه.scheme != "https" or نشانی_تجزیه.netloc.lower() not in ("tradingview.com", "www.tradingview.com"):
@@ -20,24 +20,24 @@ if نشانی_تجزیه.scheme != "https" or نشانی_تجزیه.netloc.lower
 if len(اجزا) < 3 or اجزا[0] != "chart" or not re.fullmatch(r"[A-Za-z0-9]+", اجزا[2].split("-", 1)[0]):
     sys.exit("خطا: شناسه ایده از نشانی قابل تشخیص نیست.")
 شناسه = اجزا[2].split("-", 1)[0]
-مسیر = ریشه / "تحلیل‌ها" / شناسه
+مسیر = ریشه / "analyses" / شناسه
 if مسیر.exists():
     sys.exit("پرونده‌ای با همین شناسه موجود است؛ چیزی بازنویسی نشد.")
 
-الگو = (ریشه / "الگوها" / "تحلیل-اولیه.md").read_text(encoding="utf-8")
+الگو = (ریشه / "templates" / "original.md").read_text(encoding="utf-8")
 الگو = الگو.replace("[شناسه]", شناسه).replace("[نشانی]", نشانی)
 مسیر.mkdir(parents=True)
-(مسیر / "تحلیل-اولیه.md").write_text(الگو, encoding="utf-8")
-for نوع in ("به‌روزرسانی‌ها", "برداشت‌ها", "ارزیابی‌ها"):
+(مسیر / "original.md").write_text(الگو, encoding="utf-8")
+for نوع in ("updates", "reviews", "evaluations"):
     (مسیر / نوع).mkdir()
     (مسیر / نوع / ".gitkeep").write_text("", encoding="utf-8")
 
-فهرست = ریشه / "فهرست-تحلیل‌ها.md"
+فهرست = ریشه / "INDEX.md"
 متن = فهرست.read_text(encoding="utf-8")
 نشانگر = "<!-- ردیف‌های تازه باید پیش از این خط افزوده شوند. -->"
 if نشانگر not in متن:
     sys.exit("پرونده ساخته شد، اما نشانگر فهرست یافت نشد؛ فهرست را دستی بررسی کنید.")
-سطر = f"| [{شناسه}](تحلیل‌ها/{شناسه}/تحلیل-اولیه.md) | نامشخص | نامشخص | در انتظار تکمیل | نامشخص | ندارد | [منبع]({نشانی}) |\n"
+سطر = f"| [{شناسه}](analyses/{شناسه}/original.md) | نامشخص | نامشخص | در انتظار تکمیل | نامشخص | ندارد | [منبع]({نشانی}) |\n"
 متن = متن.replace(نشانگر, سطر + "\n" + نشانگر)
 متن = متن.replace("**هنوز هیچ تحلیلی ثبت نشده است.**", "پرونده‌های ایجادشده در این فهرست ثبت می‌شوند؛ تکمیل شواهد هر پرونده جداگانه انجام می‌شود.")
 فهرست.write_text(متن, encoding="utf-8")

@@ -14,4 +14,4 @@ jobs:
         with:
           python-version: '3.12'
       - name: کنترل ساختار و مدارک
-        run: python3 ابزارها/اعتبارسنجی.py
+        run: python3 scripts/validate_structure.py
