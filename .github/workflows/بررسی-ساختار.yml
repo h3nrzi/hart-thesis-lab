@@ -1,0 +1,17 @@
+name: بررسی خودکار ساختار فارسی
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  بررسی:
+    runs-on: ubuntu-latest
+    steps:
+      - name: دریافت فایل‌های پروژه
+        uses: actions/checkout@v4
+      - name: نصب پایتون
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: کنترل ساختار و مدارک
+        run: python3 ابزارها/اعتبارسنجی.py
