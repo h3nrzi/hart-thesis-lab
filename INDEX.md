@@ -5,7 +5,7 @@
 | پرونده | نشانه نماد از لینک (تأییدنشده) | بازار | تایم‌فریم | وضعیت | لینک منبع |
 |---|---|---|---|---|---|
 
-| [DJwpAd5N](analyses/DJwpAd5N/case.md) | XAUUSD | نامشخص | نامشخص | در انتظار متن اولیه | [منبع](https://www.tradingview.com/chart/XAUUSD/DJwpAd5N-XAU-USD-Gold-Rejected-From-Supply-Are-Sellers-Taking-Control/) |
+| [DJwpAd5N](analyses/DJwpAd5N/case.md) | XAUUSD | طلا | 4H | در حال پیگیری | [منبع](https://www.tradingview.com/chart/XAUUSD/DJwpAd5N-XAU-USD-Gold-Rejected-From-Supply-Are-Sellers-Taking-Control/) |
 
 <!-- ردیف‌های تازه باید پیش از این خط افزوده شوند. -->
 
