@@ -29,10 +29,11 @@ class FlowTests(unittest.TestCase):
             "https://www.tradingview.com/chart/XAUUSD/DEMO1234-Example/")
     def initial(self):
         case = self.root/"analyses"/"DEMO1234"
-        text = (self.root/"templates"/"original.md").read_text(encoding="utf-8")
-        (case/"original.md").write_text(text.replace("[شناسه]", "DEMO1234")
-            .replace("[نشانی]", "https://www.tradingview.com/chart/XAUUSD/DEMO1234-Example/"),
-            encoding="utf-8")
+        text_file = self.root/"provided-by-user.txt"
+        text_file.write_text("متن فرضی اولیه که کاربر ارائه داده است", encoding="utf-8")
+        result = self.run_script("record_original.py", "--id", "DEMO1234",
+                                 "--text-file", str(text_file))
+        self.assertEqual(result.returncode, 0, result.stderr)
         return case
     def test_link_creates_only_case_and_index(self):
         self.assertEqual(self.create().returncode, 0)
