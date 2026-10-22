@@ -26,6 +26,7 @@ class AgentStateTests(unittest.TestCase):
         self.put("case.md", "**شناسه ایده:** TEST1234\n**نشانی منبع:** https://www.tradingview.com/chart/XAUUSD/TEST1234/\n- **وضعیت پرونده:** در انتظار متن اولیه\n")
     def status(self):return inspect(self.root,"TEST1234")
     def test_no_case(self):
+        self.case.rmdir()
         self.assertEqual(self.status()["stage"],"NOT_FOUND")
     def test_await_original(self):
         self.create_case()
