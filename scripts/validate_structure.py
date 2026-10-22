@@ -82,7 +82,11 @@ def audit(root):
     return errors, count
 
 if __name__ == "__main__":
-    errors, count = audit(ROOT)
+    import argparse
+    parser = argparse.ArgumentParser(description="اعتبارسنجی ساختار پرونده‌ها")
+    parser.add_argument("--root", type=Path, default=ROOT, help=argparse.SUPPRESS)
+    args = parser.parse_args()
+    errors, count = audit(args.root)
     if errors:
         print("اعتبارسنجی ناموفق:")
         for error in errors:
