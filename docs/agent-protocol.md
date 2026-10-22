@@ -15,9 +15,9 @@ python3 scripts/validate_structure.py
 
 ## فرمان‌های کار با پرونده
 - لینک: `python3 scripts/create_case.py --url "<link>"`؛ فقط case و INDEX ایجاد می‌شوند.
-- متن اولیه: کاربر متن را می‌دهد؛ فقط پس از آن `original.md` با [قالب](../templates/original.md) و برچسب منشأ ثبت می‌شود. `case.md` و INDEX باید به‌هنگام شوند.
-- آپدیت مدرس: متن ارسالی در فایل جدید `update-YYYYMMDDTHHMMSSZ.md` با [قالب](../templates/update.md)، نشانی منبع و زمان رویداد.
-- نقد AI: فایل جدید `review-YYYYMMDDTHHMMSSZ.md` با [قالب](../templates/review.md)، نه انتساب به مدرس.
+- متن اولیه: کاربر متن را در فایل ورودی محلی می‌دهد؛ `python3 scripts/record_original.py --id <id> --text-file <user-text.txt>` نسخه اولیه را بدون دانلود از TradingView ثبت کرده و case/INDEX را هماهنگ می‌کند. اجرای مجدد متن یکسان بدون اثر است.
+- آپدیت مدرس: `python3 scripts/record_event.py --id <id> --kind update --text-file <user-update.txt> --source-url <url>`؛ اگر مدرس نتیجه را صریحاً بررسی کرده، فقط با شواهد ارسالی کاربر `--declares-outcome --witness <evidence>` مجاز است. سند تکراری ایجاد نمی‌شود.
+- نقد AI: `python3 scripts/record_event.py --id <id> --kind review --text-file <ai-review.txt>` و ثبت مستقل در همان پوشه. تکرار متن یکسان سند دوباره نمی‌سازد.
 - نتیجه: تنها بعد از اعلام صریح مدرس، `python3 scripts/prepare_outcome.py --id <id> --update <file>` پیش‌نویس می‌دهد؛ سپس تکمیل و بسته‌شدن با کنترل جداگانه.
 
 ## پروتکل سؤال (حداقل سؤال لازم)

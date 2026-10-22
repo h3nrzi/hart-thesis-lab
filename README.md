@@ -27,4 +27,4 @@ analyses/<idea-id>/
 
 [چرخه کار](docs/workflow.md) · [قواعد ثبت شواهد](CONTRIBUTING.md) · [وضعیت‌ها](docs/statuses.md) · [معیارهای ارزیابی](docs/evaluation-criteria.md) · [فهرست پرونده‌ها](INDEX.md) · [قالب‌ها](templates/README.md)
 
-ابزارها: `scripts/create_case.py`، `scripts/prepare_outcome.py` و `scripts/validate_structure.py`. هیچ استخراج خودکار یا پایش بازار در مخزن فعال نیست. این پروژه صرفاً آموزشی است و سوددهی هیچ معامله‌گری را تأیید نمی‌کند.
+ابزارها: `scripts/create_case.py`، `scripts/record_original.py`، `scripts/record_event.py`، `scripts/agent_status.py`، `scripts/prepare_outcome.py` و `scripts/validate_structure.py`. هیچ استخراج خودکار یا پایش بازار در مخزن فعال نیست. این پروژه صرفاً آموزشی است و سوددهی هیچ معامله‌گری را تأیید نمی‌کند.
