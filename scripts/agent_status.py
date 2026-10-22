@@ -106,6 +106,10 @@ def inspect(root, idea=None):
             stage["stage"] = "CONFLICT"
             stage["blockers"].append("حداقل یک پرونده ناسازگار است")
     prompt, actions, explanation = NEXT[stage["stage"]]
+    if not idea and stage["stage"] == "AWAITING_LINK" and stage.get("cases"):
+        prompt = "برای ادامه، شناسه یکی از پرونده‌های موجود را می‌فرستی یا لینک تحلیل جدید؟"
+        actions = ["select_case", "create_case"]
+        explanation = "چند پرونده ممکن است باز باشند؛ بدون شناسه پرونده قبلی را حدس نزن"
     return {**stage, "repository_head": head, "total_cases": count,
             "next_question": prompt, "allowed_actions": actions, "note": explanation,
             "read_only": True}
